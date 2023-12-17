@@ -60,7 +60,7 @@ public class GameHardDirector : MonoBehaviour
 
         CarStopped(); //차량이 출발후 멈춤
 
-        EndGame();
+        f_EndGame();
     }
 
     void CarPosInit()
@@ -107,7 +107,7 @@ public class GameHardDirector : MonoBehaviour
         }
     }
 
-    void EndGame()
+    void f_EndGame()
     {
         //남은 기회가 0일 경우 엔딩씬으로 변경
         if (nCount == 0)
@@ -115,13 +115,6 @@ public class GameHardDirector : MonoBehaviour
             SceneManager.LoadScene("EndScene");
         }
     }
-
-    public void GameReStart()
-    {
-        //이 메소드가 호출될 경우 게임씬으로 변경
-        SceneManager.LoadScene("GameHardScenes");
-    }
-
 }
 
 
