@@ -6,7 +6,6 @@ using UnityEngine;
  *  하드 모드 전용 컨트롤러 스크립트
  */
 
-
 public class WheelbarrowHardController : MonoBehaviour
 {
     public float fWheelBarrowSpeed = 0.0f;  //수레 속도 변수

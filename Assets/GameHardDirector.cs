@@ -58,18 +58,18 @@ public class GameHardDirector : MonoBehaviour
         //gScore.GetComponent<Text>().text = "점수 : " + nScore.ToString("D") + " 점" + "남은 기회 : " + nCount.ToString("D") + " 회";
         gScore.GetComponent<Text>().text = $"점수 {nScore.ToString("D")}, 남은 기회 {nCount.ToString("D")} 회"; //점수, 남은 기회 출력
 
-        CarStopped(); //차량이 출발후 멈춤
+        WheelbarrowStopped(); //차량이 출발후 멈춤
 
         f_EndGame();
     }
 
-    void CarPosInit()
+    void WheelbarrowPosInit()
     {
         //carController.transform.position = new Vector2(fWheelbarrowInitXpos, fWheelbarrowInitYpos); //초기 위치인 x, y좌표 값으로 이동
         wheelHardController.transform.position = new Vector2(fWheelbarrowInitXpos, fWheelbarrowInitYpos); //초기 위치인 x, y좌표 값으로 이동
     }
 
-    void CarStopped()
+    void WheelbarrowStopped()
     {
         /*
         //if(차량이 시작지점에서 출발하였나? && 차량의 속도가 변수보다 낮은가?)                                            
@@ -84,13 +84,13 @@ public class GameHardDirector : MonoBehaviour
             wheelHardController.transform.position.x > fWallXpos) //or 자동차의 위치가 오른쪽 벽을 넘어갈 경우
         {
             WithinRange(); //차량이 깃발의 범위 내에 있는가?
-            CarReset(); //차량 초기화
+            WheelbarrowReset(); //차량 초기화
         }
     }
 
-    void CarReset()
+    void WheelbarrowReset()
     {
-        CarPosInit(); //위치 초기화
+        WheelbarrowPosInit(); //위치 초기화
         wheelHardController.fWheelBarrowSpeed = 0; //속도 초기화, 0으로 초기화하지 않을 경우 위치 초기화 후 지속적으로 움직임 발생
         wheelHardController.isWheelBarrowStartMoving = false; //차량이 멈추었으므로 false로 변경
         nCount--; //게임 횟수 차감
