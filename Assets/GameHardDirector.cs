@@ -4,10 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement; //씬 변경을 위해 씬매니지먼트 추가
 using UnityEngine.UI;
 
-public class GameDirector : MonoBehaviour
+/*
+ *  하드 모드 전용 디렉터 스크립트
+ */
+
+public class GameHardDirector : MonoBehaviour
 {
     //CarController carController; //대행자 선언
-    WheelbarrowController wheelController; //대행자 선언
+    WheelbarrowHardController wheelHardController; //대행자 선언
 
 
     GameObject gWheelbarrow = null; //수레 GameObject 변수
@@ -40,7 +44,7 @@ public class GameDirector : MonoBehaviour
         gGoldenChest = GameObject.Find("GoldenChest");
         gDistance = GameObject.Find("txtDistance");
         gScore = GameObject.Find("ScoreBoard");
-        wheelController = gWheelbarrow.GetComponent<WheelbarrowController>();
+        wheelHardController = gWheelbarrow.GetComponent<WheelbarrowHardController>();
     }
 
     // Update is called once per frame
@@ -62,7 +66,7 @@ public class GameDirector : MonoBehaviour
     void CarPosInit()
     {
         //carController.transform.position = new Vector2(fWheelbarrowInitXpos, fWheelbarrowInitYpos); //초기 위치인 x, y좌표 값으로 이동
-        wheelController.transform.position = new Vector2(fWheelbarrowInitXpos, fWheelbarrowInitYpos); //초기 위치인 x, y좌표 값으로 이동
+        wheelHardController.transform.position = new Vector2(fWheelbarrowInitXpos, fWheelbarrowInitYpos); //초기 위치인 x, y좌표 값으로 이동
     }
 
     void CarStopped()
@@ -76,8 +80,8 @@ public class GameDirector : MonoBehaviour
             CarReset(); //차량 초기화
         }*/
 
-        if (wheelController.isWheelBarrowStartMoving == true && wheelController.fWheelBarrowSpeed < fBoundarySpeed ||
-            wheelController.transform.position.x > fWallXpos) //or 자동차의 위치가 오른쪽 벽을 넘어갈 경우
+        if (wheelHardController.isWheelBarrowStartMoving == true && wheelHardController.fWheelBarrowSpeed < fBoundarySpeed ||
+            wheelHardController.transform.position.x > fWallXpos) //or 자동차의 위치가 오른쪽 벽을 넘어갈 경우
         {
             WithinRange(); //차량이 깃발의 범위 내에 있는가?
             CarReset(); //차량 초기화
@@ -87,16 +91,16 @@ public class GameDirector : MonoBehaviour
     void CarReset()
     {
         CarPosInit(); //위치 초기화
-        wheelController.fWheelBarrowSpeed = 0; //속도 초기화, 0으로 초기화하지 않을 경우 위치 초기화 후 지속적으로 움직임 발생
-        wheelController.isWheelBarrowStartMoving = false; //차량이 멈추었으므로 false로 변경
+        wheelHardController.fWheelBarrowSpeed = 0; //속도 초기화, 0으로 초기화하지 않을 경우 위치 초기화 후 지속적으로 움직임 발생
+        wheelHardController.isWheelBarrowStartMoving = false; //차량이 멈추었으므로 false로 변경
         nCount--; //게임 횟수 차감
     }
 
     void WithinRange()
     {
         //차량의 x좌표값이 상수값 범위 내에 존재한다면
-        if(wheelController.transform.position.x >= fLeftGoldenChestXPos 
-            && wheelController.transform.position.x <= fRightGoldenChestXpos)
+        if (wheelHardController.transform.position.x >= fLeftGoldenChestXPos
+            && wheelHardController.transform.position.x <= fRightGoldenChestXpos)
         {
             GetComponent<AudioSource>().Play();
             nScore += 10; //점수 10점 추가
@@ -106,9 +110,9 @@ public class GameDirector : MonoBehaviour
     void EndGame()
     {
         //남은 기회가 0일 경우 엔딩씬으로 변경
-        if (nCount == 0) 
+        if (nCount == 0)
         {
-            SceneManager.LoadScene("EndScene"); 
+            SceneManager.LoadScene("EndScene");
         }
     }
 
