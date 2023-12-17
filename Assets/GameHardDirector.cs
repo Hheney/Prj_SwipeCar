@@ -119,7 +119,7 @@ public class GameHardDirector : MonoBehaviour
     public void GameReStart()
     {
         //이 메소드가 호출될 경우 게임씬으로 변경
-        SceneManager.LoadScene("GameScenes");
+        SceneManager.LoadScene("GameHardScenes");
     }
 
 }
